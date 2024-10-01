@@ -293,22 +293,42 @@ function setupVideoProgressCircle(video) {
 
 
 
-    // start video at frame 0
-    const frameNumber = 0,
+//     // start video at frame 0
+//     const frameNumber = 0,
         
-    // lower numbers = faster playback
-    playbackConst = 600, 
+//     // lower numbers = faster playback
+//     playbackConst = 600, 
 
-    // select video element         
-    vid = document.getElementById('myVideo'); 
+//     // select video element         
+//     vid = document.getElementById('myVideo'); 
     
 
 
+// // Use requestAnimationFrame for smooth playback
+// function scrollPlay(){  
+// let frameNumber  = window.scrollY/playbackConst;
+// vid.currentTime  = frameNumber;
+// window.requestAnimationFrame(scrollPlay);
+// }
+
+// window.requestAnimationFrame(scrollPlay);
+
+
+// start video at frame 0
+const frameNumber = 0,
+      playbackConst = 600, 
+      vid = document.getElementById('myVideo'); 
+
 // Use requestAnimationFrame for smooth playback
 function scrollPlay(){  
-let frameNumber  = window.scrollY/playbackConst;
-vid.currentTime  = frameNumber;
-window.requestAnimationFrame(scrollPlay);
+    let frameNumber = window.scrollY / playbackConst;
+    vid.currentTime = frameNumber;
+    window.requestAnimationFrame(scrollPlay);
 }
 
+// Add event listeners for scroll and touchmove
+window.addEventListener('scroll', scrollPlay);
+window.addEventListener('touchmove', scrollPlay);
+
+// Start the animation frame loop
 window.requestAnimationFrame(scrollPlay);
