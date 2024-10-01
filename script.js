@@ -224,20 +224,68 @@ function setupVideoProgressCircle(video) {
 
 
 
+// const vid = document.getElementById('myVideo');
+
+// // pause video on load
+// vid.pause();
+ 
+// // pause video on document scroll (stops autoplay once scroll started)
+// window.onscroll = function(){
+//     vid.pause();
+// };
+
+// // refresh video frames on interval for smoother playback
+// setInterval(function(){
+//     if (window.scrollY/200 <= vid.duration) {
+//       vid.currentTime = window.scrollY/200;
+//       console.log(window.scrollY + ' ' + vid.currentTime);
+//     }
+// }, 160);
+
+
+
 const vid = document.getElementById('myVideo');
 
-// pause video on load
+// Pause video on load
 vid.pause();
- 
-// pause video on document scroll (stops autoplay once scroll started)
-window.onscroll = function(){
+
+// Pause video on document scroll (stops autoplay once scroll started)
+window.onscroll = function() {
     vid.pause();
 };
 
-// refresh video frames on interval for smoother playback
-setInterval(function(){
-    if (window.scrollY/200 <= vid.duration) {
-      vid.currentTime = window.scrollY/200;
-      console.log(window.scrollY + ' ' + vid.currentTime);
+// Refresh video frames on interval for smoother playback
+setInterval(function() {
+    if (window.scrollY / 200 <= vid.duration) {
+        vid.currentTime = window.scrollY / 200;
+        console.log(window.scrollY + ' ' + vid.currentTime);
     }
 }, 160);
+
+// Variables to track touch position
+let touchStartY = 0;
+let touchCurrentY = 0;
+
+// Handle touch start event
+vid.addEventListener('touchstart', function(event) {
+    touchStartY = event.touches[0].clientY;
+    touchCurrentY = touchStartY;
+});
+
+// Handle touch move event
+vid.addEventListener('touchmove', function(event) {
+    touchCurrentY = event.touches[0].clientY;
+    const deltaY = touchCurrentY - touchStartY;
+    const newTime = vid.currentTime + deltaY / 100; // Adjust sensitivity by changing the divisor
+    if (newTime >= 0 && newTime <= vid.duration) {
+        vid.currentTime = newTime;
+    }
+
+    touchStartY = touchCurrentY;
+});
+
+// Handle touch end event
+vid.addEventListener('touchend', function() {
+    touchStartY = 0;
+    touchCurrentY = 0;
+});
