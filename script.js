@@ -244,48 +244,71 @@ function setupVideoProgressCircle(video) {
 
 
 
-const vid = document.getElementById('myVideo');
+// const vid = document.getElementById('myVideo');
 
-// Pause video on load
-vid.pause();
+// // Pause video on load
+// vid.pause();
 
-// Pause video on document scroll (stops autoplay once scroll started)
-window.onscroll = function() {
-    vid.pause();
-};
+// // Pause video on document scroll (stops autoplay once scroll started)
+// window.onscroll = function() {
+//     vid.pause();
+// };
 
-// Refresh video frames on interval for smoother playback
-setInterval(function() {
-    if (window.scrollY / 200 <= vid.duration) {
-        vid.currentTime = window.scrollY / 200;
-        console.log(window.scrollY + ' ' + vid.currentTime);
-    }
-}, 160);
+// // Refresh video frames on interval for smoother playback
+// setInterval(function() {
+//     if (window.scrollY / 200 <= vid.duration) {
+//         vid.currentTime = window.scrollY / 200;
+//         console.log(window.scrollY + ' ' + vid.currentTime);
+//     }
+// }, 160);
 
-// Variables to track touch position
-let touchStartY = 0;
-let touchCurrentY = 0;
+// // Variables to track touch position
+// let touchStartY = 0;
+// let touchCurrentY = 0;
 
-// Handle touch start event
-vid.addEventListener('touchstart', function(event) {
-    touchStartY = event.touches[0].clientY;
-    touchCurrentY = touchStartY;
-});
+// // Handle touch start event
+// vid.addEventListener('touchstart', function(event) {
+//     touchStartY = event.touches[0].clientY;
+//     touchCurrentY = touchStartY;
+// });
 
-// Handle touch move event
-vid.addEventListener('touchmove', function(event) {
-    touchCurrentY = event.touches[0].clientY;
-    const deltaY = touchCurrentY - touchStartY;
-    const newTime = vid.currentTime + deltaY / 100; // Adjust sensitivity by changing the divisor
-    if (newTime >= 0 && newTime <= vid.duration) {
-        vid.currentTime = newTime;
-    }
+// // Handle touch move event
+// vid.addEventListener('touchmove', function(event) {
+//     touchCurrentY = event.touches[0].clientY;
+//     const deltaY = touchCurrentY - touchStartY;
+//     const newTime = vid.currentTime + deltaY / 100; // Adjust sensitivity by changing the divisor
+//     if (newTime >= 0 && newTime <= vid.duration) {
+//         vid.currentTime = newTime;
+//     }
 
-    touchStartY = touchCurrentY;
-});
+//     touchStartY = touchCurrentY;
+// });
 
-// Handle touch end event
-vid.addEventListener('touchend', function() {
-    touchStartY = 0;
-    touchCurrentY = 0;
-});
+// // Handle touch end event
+// vid.addEventListener('touchend', function() {
+//     touchStartY = 0;
+//     touchCurrentY = 0;
+// });
+
+
+
+
+    // start video at frame 0
+    const frameNumber = 0,
+        
+    // lower numbers = faster playback
+    playbackConst = 600, 
+
+    // select video element         
+    vid = document.getElementById('myVideo'); 
+    
+
+
+// Use requestAnimationFrame for smooth playback
+function scrollPlay(){  
+let frameNumber  = window.scrollY/playbackConst;
+vid.currentTime  = frameNumber;
+window.requestAnimationFrame(scrollPlay);
+}
+
+window.requestAnimationFrame(scrollPlay);
