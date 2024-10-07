@@ -6,7 +6,6 @@
 
 body {
   margin: 0;
-  height: 800vh
 }
 
 .space {
@@ -17,6 +16,9 @@ body {
 }
 .gradient-black-bottom {
   background: linear-gradient(to bottom, transparent, #000);
+}
+.video-box1 {
+  height: 800vh;
 }
 .video-background {
   position: fixed;
