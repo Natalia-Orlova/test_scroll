@@ -314,76 +314,23 @@ function setupVideoProgressCircle(video) {
 // window.requestAnimationFrame(scrollPlay);
 
 
-// start video at frame 0
-// const frameNumber = 0,
-//       playbackConst = 600, 
-//       vid = document.getElementById('myVideo'); 
+start video at frame 0
+const frameNumber = 0,
+      playbackConst = 600, 
+      vid = document.getElementById('myVideo'); 
 
-// // Use requestAnimationFrame for smooth playback
-// function scrollPlay(){  
-//     let frameNumber = window.pageYOffset / playbackConst;
-//     vid.currentTime = frameNumber;
-//     window.requestAnimationFrame(scrollPlay);
-// }
-
-// // Add event listeners for scroll and touchmove
-// window.addEventListener('scroll', scrollPlay);
-// window.addEventListener('touchmove', scrollPlay);
-
-// // Start the animation frame loop
-// window.requestAnimationFrame(scrollPlay);
-
-
-
-
-let frameNumber = 0,
-    playbackConst = 900,
-    vid = document.getElementById('myVideo');
-
-// Получение ссылки на блок video-box
-const videoBox = document.querySelector('.video-box');
-
-// Флаг для отслеживания видимости блока video-box
-let isVideoBoxVisible = false;
-
-// Создание и настройка IntersectionObserver
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            isVideoBoxVisible = true;
-        } else {
-            isVideoBoxVisible = false;
-            // Возобновляем рекурсию, когда блок становится невидимым
-            window.requestAnimationFrame(scrollPlay);
-        }
-    });
-}, {
-    root: null, // Используем область просмотра браузера
-    threshold: 0 // Блок считается видимым, как только он появляется в зоне видимости
-});
-
-observer.observe(videoBox);
-
-// Функция для плавного воспроизведения видео в зависимости от прокрутки
-function scrollPlay() {
-    if (isVideoBoxVisible) {
-        // Если блок video-box виден, прекращаем рекурсию
-        return;
-    }
-
-    // Получаем текущее положение прокрутки
-    const scrollPosition = window.scrollY;
-
-    // Вычисляем текущий номер кадра видео
-    frameNumber = scrollPosition / playbackConst;
-
-    // Устанавливаем текущее время воспроизведения видео
+// Use requestAnimationFrame for smooth playback
+function scrollPlay(){  
+    let frameNumber = window.pageYOffset / playbackConst;
     vid.currentTime = frameNumber;
-
-    // Рекурсивный вызов функции
     window.requestAnimationFrame(scrollPlay);
 }
 
-// Запуск функции в первый раз
+// Add event listeners for scroll and touchmove
+window.addEventListener('scroll', scrollPlay);
+window.addEventListener('touchmove', scrollPlay);
+
+// Start the animation frame loop
 window.requestAnimationFrame(scrollPlay);
+
 
