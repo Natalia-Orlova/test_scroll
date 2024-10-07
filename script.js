@@ -315,22 +315,63 @@ function setupVideoProgressCircle(video) {
 
 
 // start video at frame 0
-const frameNumber = 0,
-      playbackConst = 600, 
-      vid = document.getElementById('myVideo'); 
+// const frameNumber = 0,
+//       playbackConst = 600, 
+//       vid = document.getElementById('myVideo'); 
 
-// Use requestAnimationFrame for smooth playback
-function scrollPlay(){  
+// // Use requestAnimationFrame for smooth playback
+// function scrollPlay(){  
+//     let frameNumber = window.pageYOffset / playbackConst;
+//     vid.currentTime = frameNumber;
+//     window.requestAnimationFrame(scrollPlay);
+// }
+
+// // Add event listeners for scroll and touchmove
+// window.addEventListener('scroll', scrollPlay);
+// window.addEventListener('touchmove', scrollPlay);
+
+// // Start the animation frame loop
+// window.requestAnimationFrame(scrollPlay);
+
+
+
+
+
+
+
+const playbackConst = 600;
+const vid = document.getElementById('myVideo');
+
+// Проверка, загружено ли видео
+vid.addEventListener('loadeddata', () => {
+    console.log('Video loaded');
+    startScrollPlay();
+});
+
+// Функция для запуска scrollPlay
+function startScrollPlay() {
     let frameNumber = window.pageYOffset / playbackConst;
     vid.currentTime = frameNumber;
     window.requestAnimationFrame(scrollPlay);
 }
 
-// Add event listeners for scroll and touchmove
-window.addEventListener('scroll', scrollPlay);
-window.addEventListener('touchmove', scrollPlay);
+// Основная функция для скролла
+function scrollPlay() {
+    let frameNumber = window.pageYOffset / playbackConst;
+    vid.currentTime = frameNumber;
+    window.requestAnimationFrame(scrollPlay);
+}
 
-// Start the animation frame loop
-window.requestAnimationFrame(scrollPlay);
+// Использование IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        window.addEventListener('scroll', scrollPlay);
+        window.addEventListener('touchmove', scrollPlay);
+    } else {
+        window.removeEventListener('scroll', scrollPlay);
+        window.removeEventListener('touchmove', scrollPlay);
+    }
+}, { threshold: 0.1 });
 
+observer.observe(vid);
 
