@@ -293,14 +293,14 @@ function setupVideoProgressCircle(video) {
 
 
 
-    // start video at frame 0
-    let frameNumber = 0,
+    // // start video at frame 0
+    // let frameNumber = 0,
         
-    // lower numbers = faster playback
-    playbackConst = 600, 
+    // // lower numbers = faster playback
+    // playbackConst = 600, 
 
-    // select video element         
-    vid = document.getElementById('myVideo'); 
+    // // select video element         
+    // vid = document.getElementById('myVideo'); 
     
 
 
