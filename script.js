@@ -314,7 +314,7 @@ function setupVideoProgressCircle(video) {
 // window.requestAnimationFrame(scrollPlay);
 
 
-start video at frame 0
+// start video at frame 0
 const frameNumber = 0,
       playbackConst = 600, 
       vid = document.getElementById('myVideo'); 
