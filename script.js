@@ -350,14 +350,14 @@ vid.addEventListener('loadeddata', () => {
 
 // Функция для запуска scrollPlay
 function startScrollPlay() {
-    let frameNumber = window.pageYOffset / playbackConst;
+    let frameNumber = window.scrollY / playbackConst;
     vid.currentTime = frameNumber;
     window.requestAnimationFrame(scrollPlay);
 }
 
 // Основная функция для скролла
 function scrollPlay() {
-    let frameNumber = window.pageYOffset / playbackConst;
+    let frameNumber = window.scrollY / playbackConst;
     vid.currentTime = frameNumber;
     window.requestAnimationFrame(scrollPlay);
 }
