@@ -150,7 +150,7 @@ const frameNumber = 0,
 
 // Use requestAnimationFrame for smooth playback
 function scrollPlay(){  
-    let frameNumber = window.pageYOffset / playbackConst;
+    let frameNumber = window.scrollY / playbackConst;
     vid.currentTime = frameNumber;
     window.requestAnimationFrame(scrollPlay);
 }
