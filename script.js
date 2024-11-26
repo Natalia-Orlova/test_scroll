@@ -161,4 +161,7 @@ window.addEventListener('touchmove', scrollPlay);
 
 window.requestAnimationFrame(scrollPlay);
 
+const vidSrc = document.querySelector(source);
+console.log(videoSrc);
+
 
